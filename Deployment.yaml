@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: demo-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: demo
@@ -14,15 +14,6 @@ spec:
     spec:
       containers:
       - name: demo
-        image: <your-docker-image>
+        image: 989988/demoapp:1.0.0
         ports:
         - containerPort: 8080
-        envFrom:
-        - configMapRef:
-            name: app-config
-        env:
-        - name: COLOR
-          valueFrom:
-            secretKeyRef:
-              name: color-secret
-              key: color
