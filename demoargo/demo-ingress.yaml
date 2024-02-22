@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+ name: demo-ingress
+spec:
+ rules:
+ - host: demoargo.home.lab
+   http:
+     paths:
+     - path: /
+       pathType: Prefix
+       backend:
+         serviceName: demo-service
+         servicePort: 80
