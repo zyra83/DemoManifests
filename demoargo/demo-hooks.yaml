@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -14,5 +15,43 @@ spec:
         command:
           - "echo"
           - "L’application sera synchronisé avec un nouvel état désiré."
+      restartPolicy: Never
+  backoffLimit: 2 # si 2 échecs, on arrête de tenter
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: demoargo-notif-syncok
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: notification-dans-les-logs
+        image: alpine
+        command:
+          - "echo"
+          - "La synchro de demoargo s'est bien effectué."
+      restartPolicy: Never
+  backoffLimit: 2 # si 2 échecs, on arrête de tenter
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: demoargo-notif-syncko
+  annotations:
+    argocd.argoproj.io/hook: SyncFail
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: notification-dans-les-logs
+        image: alpine
+        command:
+          - "echo"
+          - "La synchro de demoargo a échoué."
       restartPolicy: Never
   backoffLimit: 2 # si 2 échecs, on arrête de tenter
