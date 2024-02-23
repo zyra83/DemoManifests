@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: 989988/demoapp:2.0.0
+        image: mlsdkqmskfsdfmlskf/demoapp:2.0.0
         ports:
         - containerPort: 8080
 
