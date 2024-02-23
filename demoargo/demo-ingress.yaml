@@ -4,7 +4,7 @@ metadata:
  name: demo-ingress
 spec:
  rules:
- - host: ZAMLKZEAMLRKMLRFKE.home.lab
+ - host: demoargo.home.lab
    http:
      paths:
      - path: /
