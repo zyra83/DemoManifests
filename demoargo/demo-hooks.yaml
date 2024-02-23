@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: demoargo-presyncnotif
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: notification-dans-les-logs
+        image: alpine
+        command:
+          - "echo"
+          - "L’application sera synchronisé avec un nouvel état désiré."
+      restartPolicy: Never
+  backoffLimit: 2
